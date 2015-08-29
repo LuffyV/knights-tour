@@ -1,0 +1,47 @@
+body{
+	background-color: #FFFFCC;
+}
+
+table {
+	padding-top: 20px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+h2 {
+	text-align: center;
+}
+
+input {
+	height: 25px;
+	width: 150px;
+	background-color: #a3239f;
+	float: right;
+}
+
+td div {
+	height: 25px;
+	width: 25px;
+	text-align: center;
+	background-color: black;
+	color: white;
+	padding: 12px;
+	border:2px solid #000;
+}
+
+#sidebar {
+	background-color: #0066FF;
+	color: white;
+	border:1px solid black;
+	width:165px;
+	position:absolute;
+	top:1;
+	right:0;
+}
+
+.contador{
+	padding: 5px;
+	border: 0px;
+	background-color: #0066FF;
+	color: white;
+}

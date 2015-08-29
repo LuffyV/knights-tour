@@ -1,0 +1,58 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Caballito</title>
+	<link rel="stylesheet" type="text/css" href="css/knight.css">
+	<script type="text/javascript" src="js/knight.js"></script>
+</head>
+<body>
+<center><img src="img/chess.png"></center>
+
+<table>
+<tr>
+	<td><div id="d11">.</div></td> <td><div id="d21">.</div></td> <td><div id="d31">.</div></td> <td><div id="d41">.</div></td>
+	<td><div id="d51">.</div></td> <td><div id="d61">.</div></td> <td><div id="d71">.</div></td> <td><div id="d81">.</div></td>
+</tr>
+<tr>
+	<td><div id="d12">.</div></td> <td><div id="d22">.</div></td> <td><div id="d32">.</div></td> <td><div id="d42">.</div></td>
+	<td><div id="d52">.</div></td> <td><div id="d62">.</div></td> <td><div id="d72">.</div></td> <td><div id="d82">.</div></td>
+</tr>
+<tr>
+	<td><div id="d13">.</div></td> <td><div id="d23">.</div></td> <td><div id="d33">.</div></td> <td><div id="d43">.</div></td>
+	<td><div id="d53">.</div></td> <td><div id="d63">.</div></td> <td><div id="d73">.</div></td> <td><div id="d83">.</div></td>
+</tr>
+<tr>
+	<td><div id="d14">.</div></td> <td><div id="d24">.</div></td> <td><div id="d34">.</div></td> <td><div id="d44">.</div></td>
+	<td><div id="d54">.</div></td> <td><div id="d64">.</div></td> <td><div id="d74">.</div></td> <td><div id="d84">.</div></td>
+</tr>
+<tr>
+	<td><div id="d15">.</div></td> <td><div id="d25">.</div></td> <td><div id="d35">.</div></td> <td><div id="d45">.</div></td>
+	<td><div id="d55">.</div></td> <td><div id="d65">.</div></td> <td><div id="d75">.</div></td> <td><div id="d85">.</div></td>
+</tr>
+<tr>
+	<td><div id="d16">.</div></td> <td><div id="d26">.</div></td> <td><div id="d36">.</div></td> <td><div id="d46">.</div></td>
+	<td><div id="d56">.</div></td> <td><div id="d66">.</div></td> <td><div id="d76">.</div></td> <td><div id="d86">.</div></td>
+</tr>
+<tr>
+	<td><div id="d17">.</div></td> <td><div id="d27">.</div></td> <td><div id="d37">.</div></td> <td><div id="d47">.</div></td>
+	<td><div id="d57">.</div></td> <td><div id="d67">.</div></td> <td><div id="d77">.</div></td> <td><div id="d87">.</div></td>
+</tr>
+<tr>
+	<td><div id="d18">.</div></td> <td><div id="d28">.</div></td> <td><div id="d38">.</div></td> <td><div id="d48">.</div></td>
+	<td><div id="d58">.</div></td> <td><div id="d68">.</div></td> <td><div id="d78">.</div></td> <td><div id="d88">.</div></td>
+</tr>
+</table>
+
+<h2>v1. El promedio no funciona por error en contador de ejecuciones.</h2>
+
+<div id="sidebar">
+	<h2>Se han encontrado: <div class="contador" id="contadorCasillas">0</div> casillas correctas.</h2><br>
+	<h2>A lo largo de <div class="contador" id="contadorEjecuciones">0</div> ejecuciones.</h2>
+	<h2>Se ha tenido un promedio de<div class="contador" id="contadorPromedio">0</div> casillas descubiertas por ejecución.</h2>
+	<input type="button" value="Realizar un intento" onclick="reintentar()"> <br><br>
+	<input type="button" value="Limpiar tablero" onclick="limpiar()"> <br><br>
+
+</div>
+
+</body>
+</html>
