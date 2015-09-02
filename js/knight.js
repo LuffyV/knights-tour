@@ -3,11 +3,11 @@ var numeroIntentoFallido = 0;
 var casillasDescubiertasTotales = 0;
 var contadorCasillas = 0;
 var tipoMovimiento = 0;
-var ejecucionesAlgoritmo = 0; // por alguna razón siempre se regresa a 0 aunque nunca lo vuelvas a declarar así
+var ejecucionesAlgoritmo = 0;
 
 // solo el random inicial
 function casillaInicial(){
-	if(ejecucionesAlgoritmo = 0){
+	if(ejecucionesAlgoritmo == 0){
 		// alert("Se iniciará con el algoritmo, para saltarse todos los mensajes de prueba has click en la opción de 'Evitar que esta página cree cuadros adicionales.'");
 	}
 	var casillaInicialX = Math.floor((Math.random() * 8) + 1);
@@ -85,7 +85,7 @@ function colorearCasillaIncorrecta(casillaIncorrectaX, casillaIncorrectaY){
 
 function promedio(casillasDescubiertasTotales){
 	ejecucionesAlgoritmo++;
-	var promedioCasillas = (casillasDescubiertasTotales)/(ejecucionesAlgoritmo);
+	var promedioCasillas = ((casillasDescubiertasTotales)/(ejecucionesAlgoritmo)).toFixed(2);
 	document.getElementById("contadorPromedio").innerHTML = promedioCasillas;
 	document.getElementById("contadorEjecuciones").innerHTML = ejecucionesAlgoritmo;
 }
