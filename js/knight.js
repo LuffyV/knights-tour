@@ -4,26 +4,26 @@ var casillasDescubiertasTotales = 0;
 var contadorCasillas = 0;
 var tipoMovimiento = 0;
 var ejecucionesAlgoritmo = 0;
+var ejecucionesRapidas = 0;
+var juegoRapido = 0;
 
-// solo el random inicial
 function casillaInicial(){
-	if(ejecucionesAlgoritmo == 0){
-		// alert("Se iniciará con el algoritmo, para saltarse todos los mensajes de prueba has click en la opción de 'Evitar que esta página cree cuadros adicionales.'");
-	}
 	var casillaInicialX = Math.floor((Math.random() * 8) + 1);
 	var casillaInicialY = Math.floor((Math.random() * 8) + 1);
 	colorearCasillaCorrecta(casillaInicialX, casillaInicialY);
 }
 
-// algoritmo para cada movimiento subsecuente
+function juegoContinuo(){
+	juegoRapido = 1;
+	intentar();
+}
+
 function randomJump(casillaActualX, casillaActualY){
-	// para ir intentado manualmente cada tipo de movimiento si el primero no era válido
+	// si el random no es válido, que vaya probando 1 por 1
 	if(numeroIntentoFallido > 0){
-		tipoMovimiento = numeroIntentoFallido - 1; // para que empiece probando el tipoMovimiento = 0
-		// alert("Falló, ahora evaluando tipoMovimiento = " + tipoMovimiento + " (" + numeroIntentoFallido + " - 1).");
+		tipoMovimiento = numeroIntentoFallido - 1;
 	} else {
 		tipoMovimiento = Math.floor(Math.random() * 8);
-		// alert("Evaluando al azar el tipoMovimiento = " + tipoMovimiento);
 	}
 	movimientos(casillaActualX, casillaActualY);
 }
@@ -34,23 +34,18 @@ function procesaNuevaCoordenada(casillaActualX, casillaActualY, movimientoX, mov
 	var casillaNuevaY = casillaActualY + movimientoY;
 	var coordenadaNueva = document.getElementById("d" + casillaNuevaX + casillaNuevaY);
 
-	// alert("Se va a probar la casilla: " + casillaNuevaX + ", " + casillaNuevaY);
 	validarCasilla(casillaNuevaX, casillaNuevaY, casillaActualX, casillaActualY);
 }
 
 function validarCasilla(casillaNuevaX, casillaNuevaY, casillaActualX, casillaActualY){
 	var coordenadaPorValidar = document.getElementById("d" + casillaNuevaX + casillaNuevaY);
 
-	// quita la última condición para que pase algo bonito
 	if(casillaNuevaX <= 8 && casillaNuevaY <= 8 && casillaNuevaX > 0 && casillaNuevaY > 0 && coordenadaPorValidar.innerHTML == "."){
 		colorearCasillaCorrecta(casillaNuevaX, casillaNuevaY);
 	} else {
 		numeroIntentoFallido++;
-		// alert("No se puede colorear esa, numeroIntentoFallido = " + numeroIntentoFallido);
 
-		// Si ya probó todas las opciones, se termina. Si no, vuelve a intentar la siguiente opción.
 		if(numeroIntentoFallido > 8){
-			// alert("Se debe colorear la última casilla");
 			colorearCasillaIncorrecta(casillaActualX, casillaActualY, ejecucionesAlgoritmo);
 		} else {
 			randomJump(casillaActualX, casillaActualY);
@@ -58,7 +53,6 @@ function validarCasilla(casillaNuevaX, casillaNuevaY, casillaActualX, casillaAct
 	}
 }
 
-// se pinta de verde la casilla correcta
 function colorearCasillaCorrecta(casillaCorrectaX, casillaCorrectaY){
 	numeroIntentoFallido = 0;
 	contadorCasillas++;
@@ -79,18 +73,30 @@ function colorearCasillaIncorrecta(casillaIncorrectaX, casillaIncorrectaY){
 	var coordenadaIncorrecta = document.getElementById("d" + casillaIncorrectaX + casillaIncorrectaY);
 	coordenadaIncorrecta.style.backgroundColor = "#CC2929";
 	casillasDescubiertasTotales += contadorCasillas;
-	promedio(casillasDescubiertasTotales, ejecucionesAlgoritmo);
+	ejecucionesAlgoritmo++;
+
+	promedio();
 	contadorCasillas = 0;
+
+	if(juegoRapido == 1){
+		if(ejecucionesRapidas < 49){
+			ejecucionesRapidas++;
+			intentar();
+		} else {
+			juegoRapido = 0;
+			ejecucionesRapidas = 0;
+		}
+	}
 }
 
-function promedio(casillasDescubiertasTotales){
-	ejecucionesAlgoritmo++;
+// aquí termina cada ejecución
+function promedio(){
 	var promedioCasillas = ((casillasDescubiertasTotales)/(ejecucionesAlgoritmo)).toFixed(2);
 	document.getElementById("contadorPromedio").innerHTML = promedioCasillas;
 	document.getElementById("contadorEjecuciones").innerHTML = ejecucionesAlgoritmo;
 }
 
-function reintentar(){
+function intentar(){
 	limpiar();
 	casillaInicial();
 }
@@ -103,7 +109,12 @@ function limpiar(){
 			d.innerHTML = ".";
 		}
 	}
-	
+	if(ejecucionesAlgoritmo >= 800){
+		alert("Se han hecho demasiadas ejecuciones, borrando datos para evitar problemas de memoria.");
+		casillasDescubiertasTotales = 0;
+		ejecucionesAlgoritmo = 0;
+
+	}
 }
 
 // declarando los distintos tipos de movimientos que se pueden hacer
