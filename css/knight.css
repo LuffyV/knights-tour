@@ -39,9 +39,18 @@ td div {
 	right:0;
 }
 
+#puntos {
+	background-color: #00B200;
+	color: white;
+	border:1px solid black;
+	width:165px;
+	position:absolute;
+	top:1;
+	left:0;
+}
+
 .contador{
 	padding: 5px;
 	border: 0px;
-	background-color: #0066FF;
 	color: white;
 }

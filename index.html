@@ -43,16 +43,20 @@
 </tr>
 </table>
 
-<h2>v3. Agregada la función de múltiples ejecuciones automáticas.</h2>
+<h2>v3.1 Nuevas funciones, hay un par de bugs.</h2>
+
+<div id="puntos">
+	<h2>Highscore:<div class="contador" id="highscore">0</div></h2>
+</div>
 
 <div id="sidebar">
 	<h2>Se han encontrado: <div class="contador" id="contadorCasillas">0</div> casillas correctas.</h2><br>
 	<h2>A lo largo de <div class="contador" id="contadorEjecuciones">0</div> ejecuciones.</h2>
 	<h2>Se ha tenido un promedio de<div class="contador" id="contadorPromedio">0</div> casillas descubiertas por ejecución.</h2>
 	<input type="button" value="Realizar un intento" onclick="intentar()"> <br><br>
-	<input type="button" value="50 Intentos a la vez" onclick="juegoContinuo()"> <br><br>
+	<input type="button" value="50 Intentos a la vez" onclick="jugarContinuo()"> <br><br>
+	<!--<input type="button" value="Jugar hasta obtener una respuesta" onclick="jugarInfinito()"> <br><br>-->
 	<input type="button" value="Limpiar tablero" onclick="limpiar()"> <br><br>
-
 </div>
 
 </body>

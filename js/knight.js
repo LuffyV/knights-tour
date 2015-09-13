@@ -1,11 +1,14 @@
 // globales
 var numeroIntentoFallido = 0;
 var casillasDescubiertasTotales = 0;
+var highscore = 0;
 var contadorCasillas = 0;
 var tipoMovimiento = 0;
 var ejecucionesAlgoritmo = 0;
 var ejecucionesRapidas = 0;
-var juegoRapido = 0;
+var juegoContinuo = false;
+var terminado = false;
+var juegoInfinito = false;
 
 function casillaInicial(){
 	var casillaInicialX = Math.floor((Math.random() * 8) + 1);
@@ -13,8 +16,14 @@ function casillaInicial(){
 	colorearCasillaCorrecta(casillaInicialX, casillaInicialY);
 }
 
-function juegoContinuo(){
-	juegoRapido = 1;
+// checar booleano
+function jugarContinuo(){
+	juegoContinuo = true;
+	intentar();
+}
+
+function jugarInfinito(){
+	juegoInfinito = true;
 	intentar();
 }
 
@@ -46,7 +55,7 @@ function validarCasilla(casillaNuevaX, casillaNuevaY, casillaActualX, casillaAct
 		numeroIntentoFallido++;
 
 		if(numeroIntentoFallido > 8){
-			colorearCasillaIncorrecta(casillaActualX, casillaActualY, ejecucionesAlgoritmo);
+			colorearCasillaIncorrecta(casillaActualX, casillaActualY);
 		} else {
 			randomJump(casillaActualX, casillaActualY);
 		}
@@ -73,18 +82,24 @@ function colorearCasillaIncorrecta(casillaIncorrectaX, casillaIncorrectaY){
 	var coordenadaIncorrecta = document.getElementById("d" + casillaIncorrectaX + casillaIncorrectaY);
 	coordenadaIncorrecta.style.backgroundColor = "#CC2929";
 	casillasDescubiertasTotales += contadorCasillas;
-	ejecucionesAlgoritmo++;
+	ejecucionesAlgoritmo++;	
 
 	promedio();
+	obtenerHighscore();
+
 	contadorCasillas = 0;
 
-	if(juegoRapido == 1){
-		if(ejecucionesRapidas < 49){
-			ejecucionesRapidas++;
-			intentar();
-		} else {
-			juegoRapido = 0;
-			ejecucionesRapidas = 0;
+	if(juegoInfinito){
+		intentar();
+	} else {
+		if(juegoContinuo == true && !terminado){
+			if(ejecucionesRapidas < 49){
+				ejecucionesRapidas++;
+				intentar();
+			} else {
+				juegoContinuo = 0;
+				ejecucionesRapidas = 0;
+			}
 		}
 	}
 }
@@ -94,6 +109,21 @@ function promedio(){
 	var promedioCasillas = ((casillasDescubiertasTotales)/(ejecucionesAlgoritmo)).toFixed(2);
 	document.getElementById("contadorPromedio").innerHTML = promedioCasillas;
 	document.getElementById("contadorEjecuciones").innerHTML = ejecucionesAlgoritmo;
+}
+
+function obtenerHighscore(){
+	if(contadorCasillas > highscore){
+		highscore = contadorCasillas;
+		document.getElementById("highscore").innerHTML = highscore;
+		if(highscore == 64){
+			juegoTerminado();
+		}
+	}
+}
+
+function juegoTerminado(){
+	alert("Felicidades, encontraste una solución al problema!");
+	terminado = true;
 }
 
 function intentar(){
